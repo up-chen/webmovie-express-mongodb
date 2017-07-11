@@ -1,0 +1,6 @@
+node_modules
+/public/upload
+
+test.html
+test.js
+*.bak, etc

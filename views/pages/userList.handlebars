@@ -1,0 +1,29 @@
+{{> header}}
+<div class="container">
+	<div class="row">
+		<table class="table table-hover table-border">
+			<thead>
+				<tr>
+					<th>用户名</th>
+					<th>注册时间</th>
+					<th>查看</th>
+					<th>删除</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each users}}
+					<tr class="item-id-{{id}}">
+						<td>{{name}}</td>
+						<td>{{moment meta.updateAt}}</td>
+						<td><a href="/users/info/{{id}}" target="_blank">查看</a></td>
+						<td><button class="btn btn-danger del" type="button" data-id="{{id}}" data-type="user">删除
+						</button></td>
+					</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+{{> footer}}
+<script type="text/javascript" src="/javascripts/delete.js"></script>

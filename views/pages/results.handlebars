@@ -1,0 +1,33 @@
+{{> header}}
+
+<div class="container">
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>{{keyword}}</h3>
+			</div>
+			<div class="panel-body">
+				{{#if movies}}
+					{{#each movies}}
+					<div class="col-md-2">
+						<div class="thumbnail">
+							<a href="/movie/{{_id}}">
+								<img src="{{poster}}" alt="{{title}}">
+							</a>
+							<div class="caption">
+								<h3>{{title}}</h3>
+								<p><a class="btn btn-primary" href="/movie/{{_id}}" role="button" >观看预告片</a></p>
+							</div>
+						</div>
+					</div>
+					{{/each}}
+				{{/if}}
+			</div>
+		</div>	
+		<ul class="pagination">
+			{{{list pages cpage link}}}
+		</ul>
+	</div>
+</div>
+
+{{> footer}}

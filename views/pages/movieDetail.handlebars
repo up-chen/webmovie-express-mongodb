@@ -1,0 +1,91 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-7">
+			<embed src="{{movie.flash}}" allowFullScreen="true" quality="high" width="720" height="600" align="middle" type="application/x-shockwave-flash"></embed>
+			
+			<div class="panel panel-defaulr">
+				<div class="panel-heading">
+					<h3>评论区</h3>
+				</div>
+				<div class="panel-body">
+					<ul class="media-list">
+						{{#each comments}}
+						<li class="media">
+							<a href="#comments" class="media-left icon" data-cid="{{id}}" data-uid="{{userId}}">
+								<img src="/images/cat.jpg">
+							</a>
+							<div class="media-body">
+								<h4 class="media-heading">{{username}}</h4>
+								<p>{{content}}</p>
+								
+								{{#if reply}}
+									{{#each reply}}
+									<div class="media">
+										<a href="#comments" class="media-left icon" data-cid="{{../id}}" data-uid="{{from._id}}">
+											<img src="/images/cat.jpg">
+										</a>
+										
+										<div class="media-body">
+											<h4 class="media-heading">{{from.username}}
+												&nbsp;
+												<span class="text-info">回复</span>
+												&nbsp;
+												{{to.username}}
+											</h4>
+
+											<p>{{content}}</p>
+										</div>
+									</div>
+									{{/each}}
+								{{/if}}
+							</div>
+						</li>
+						{{/each}}
+					</ul>
+
+					<div class="comments">
+						<form id="commentFrom" method="POST" action="/users/comment">
+							<input type="hidden" name="movieId" value="{{movie.id}}">
+							{{#if user}}
+								<input type="hidden" name="userId" value="{{user._id}}">
+							{{/if}}
+							<textarea class="form-control " name="content" row="3"></textarea>
+							{{#if user}}
+								<button class="btn btn-primary" type="submit">发表评论</button>
+							{{else}}
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signinModal">登录后评论</button>
+							{{/if}}
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-5">
+			<dl class="dl-horizontal">
+				<dt>电影名字</dt>
+				<dd>{{movie.title}}</dd>
+				<dt>类别</dt>
+				<dd>
+				{{#if movie.category}}
+				{{#each movie.category}}
+					{{name}}
+					&nbsp;
+				{{/each}}
+				{{/if}}
+				</dd>
+				<dt>导演</dt>
+				<dd>{{movie.director}}</dd>
+				<dt>国家</dt>
+				<dd>{{movie.country}}</dd>
+				<dt>语言</dt>
+				<dd>{{movie.language}}</dd>
+				<dt>上映年份</dt>
+				<dd>{{movie.year}}</dd>
+				<dt>简介</dt>
+				<dd>{{movie.summary}}</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="/javascripts/comment.js"></script>
+{{> footer}}
